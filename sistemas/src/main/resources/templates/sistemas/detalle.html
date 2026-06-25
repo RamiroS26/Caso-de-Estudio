@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del sistema</title>
+    <link rel="stylesheet" th:href="@{/sistemas/css/detalle.css}" href="/sistemas/css/detalle.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a class="active" th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell narrow">
+    <div class="page-title-row">
+        <div>
+            <p class="eyebrow">Detalle</p>
+            <h1 th:text="${sistema.nombre}">Sistema de Inventario</h1>
+        </div>
+        <div class="title-actions">
+            <a class="btn btn-secondary"
+               th:href="@{/sistemas/editar/{id}(id=${sistema.id})}"
+               href="/sistemas/editar/1">Editar</a>
+            <a class="btn btn-ghost" th:href="@{/sistemas/listar}" href="/sistemas/listar">Volver</a>
+        </div>
+    </div>
+
+    <section class="detail-card">
+        <dl class="detail-grid">
+            <div>
+                <dt>ID</dt>
+                <dd th:text="${sistema.id}">1</dd>
+            </div>
+            <div>
+                <dt>Autor</dt>
+                <dd th:text="${sistema.autor != null and !#strings.isEmpty(sistema.autor) ? sistema.autor : 'Sin autor'}">Equipo Desarrollo</dd>
+            </div>
+            <div>
+                <dt>A&ntilde;o</dt>
+                <dd th:text="${sistema.anio != null ? sistema.anio : 'Sin a&ntilde;o'}">2026</dd>
+            </div>
+            <div>
+                <dt>Oficina</dt>
+                <dd th:text="${sistema.oficina != null ? sistema.oficina.nombre : 'Sin asignar'}">Mesa de Entrada</dd>
+            </div>
+            <div class="detail-full">
+                <dt>Descripci&oacute;n</dt>
+                <dd th:text="${sistema.descripcion != null and !#strings.isEmpty(sistema.descripcion) ? sistema.descripcion : 'Sin descripci&oacute;n'}">Control de bienes inform&aacute;ticos.</dd>
+            </div>
+        </dl>
+    </section>
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/sistemas/js/detalle.js}" src="/sistemas/js/detalle.js"></script>
+</body>
+</html>

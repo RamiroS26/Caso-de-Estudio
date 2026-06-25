@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${oficina != null and oficina.id != null ? 'Editar oficina' : 'Nueva oficina'}">Oficina</title>
+    <link rel="stylesheet" th:href="@{/oficinas/css/crear.css}" href="/oficinas/css/crear.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a class="active" th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell narrow">
+    <div class="page-title-row">
+        <div>
+            <p class="eyebrow">Oficina</p>
+            <h1 th:text="${oficina != null and oficina.id != null ? 'Editar oficina' : 'Nueva oficina'}">Nueva oficina</h1>
+        </div>
+        <a class="btn btn-secondary" th:href="@{/oficinas/listar}" href="/oficinas/listar">Volver</a>
+    </div>
+
+    <form class="form-card"
+          th:action="@{/oficinas/guardar}"
+          th:object="${oficina}"
+          action="/oficinas/guardar"
+          method="post"
+          data-dirty-warning>
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-grid">
+            <label class="field field-full">
+                <span>Nombre</span>
+                <input type="text" th:field="*{nombre}" maxlength="30" required placeholder="Ej. Mesa de Entrada">
+                <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error de nombre</small>
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <a class="btn btn-ghost" th:href="@{/oficinas/listar}" href="/oficinas/listar">Cancelar</a>
+            <button class="btn btn-primary" type="submit">Guardar oficina</button>
+        </div>
+    </form>
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/oficinas/js/crear.js}" src="/oficinas/js/crear.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oficinas</title>
+    <link rel="stylesheet" th:href="@{/oficinas/css/listar.css}" href="/oficinas/css/listar.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a class="active" th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <div class="page-title-row">
+        <div>
+            <p class="eyebrow">CRUD</p>
+            <h1>Oficinas</h1>
+        </div>
+        <a class="btn btn-primary" th:href="@{/oficinas/crear}" href="/oficinas/crear">Nueva oficina</a>
+    </div>
+
+    <div class="alert success" th:if="${mensaje}" th:text="${mensaje}">Operaci&oacute;n realizada correctamente.</div>
+    <div class="alert danger" th:if="${error}" th:text="${error}">No se pudo completar la operaci&oacute;n.</div>
+
+    <section class="toolbar" aria-label="Filtros de oficinas">
+        <label class="search-field">
+            <span>Buscar</span>
+            <input type="search" placeholder="Nombre de oficina" data-table-filter="tabla-oficinas">
+        </label>
+    </section>
+
+    <section class="table-card">
+        <div class="table-wrap">
+            <table id="tabla-oficinas" class="data-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Sistemas</th>
+                    <th class="actions-col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="oficina : ${oficinas}">
+                    <td th:text="${oficina.id}">1</td>
+                    <td><strong th:text="${oficina.nombre}">Mesa de Entrada</strong></td>
+                    <td th:text="${oficina.sistemas != null ? #lists.size(oficina.sistemas) : 0}">3</td>
+                    <td>
+                        <div class="row-actions">
+                            <a class="btn btn-small btn-ghost"
+                               th:href="@{/oficinas/detalle/{id}(id=${oficina.id})}"
+                               href="/oficinas/detalle/1">Ver</a>
+                            <a class="btn btn-small btn-secondary"
+                               th:href="@{/oficinas/editar/{id}(id=${oficina.id})}"
+                               href="/oficinas/editar/1">Editar</a>
+                            <a class="btn btn-small btn-danger"
+                               th:href="@{/oficinas/eliminar/{id}(id=${oficina.id})}"
+                               href="/oficinas/eliminar/1">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${oficinas == null or #lists.isEmpty(oficinas)}">
+                    <td colspan="4" class="empty-state">No hay oficinas registradas.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/oficinas/js/listar.js}" src="/oficinas/js/listar.js"></script>
+</body>
+</html>

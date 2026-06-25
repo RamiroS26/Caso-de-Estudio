@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar sistema</title>
+    <link rel="stylesheet" th:href="@{/sistemas/css/eliminar.css}" href="/sistemas/css/eliminar.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a class="active" th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell narrow">
+    <div class="page-title-row">
+        <div>
+            <p class="eyebrow">Baja</p>
+            <h1>Eliminar sistema</h1>
+        </div>
+        <a class="btn btn-secondary" th:href="@{/sistemas/listar}" href="/sistemas/listar">Volver</a>
+    </div>
+
+    <section class="delete-card">
+        <p class="delete-warning">Est&aacute;s por eliminar este sistema del registro.</p>
+        <dl class="detail-grid">
+            <div>
+                <dt>ID</dt>
+                <dd th:text="${sistema.id}">1</dd>
+            </div>
+            <div>
+                <dt>Nombre</dt>
+                <dd th:text="${sistema.nombre}">Sistema de Inventario</dd>
+            </div>
+            <div>
+                <dt>Autor</dt>
+                <dd th:text="${sistema.autor != null and !#strings.isEmpty(sistema.autor) ? sistema.autor : 'Sin autor'}">Equipo Desarrollo</dd>
+            </div>
+            <div>
+                <dt>Oficina</dt>
+                <dd th:text="${sistema.oficina != null ? sistema.oficina.nombre : 'Sin asignar'}">Mesa de Entrada</dd>
+            </div>
+        </dl>
+
+        <form class="form-actions"
+              th:action="@{/sistemas/eliminar/{id}(id=${sistema.id})}"
+              action="/sistemas/eliminar/1"
+              method="post"
+              data-delete-form>
+            <a class="btn btn-ghost" th:href="@{/sistemas/listar}" href="/sistemas/listar">Cancelar</a>
+            <button class="btn btn-danger" type="submit">Confirmar baja</button>
+        </form>
+    </section>
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/sistemas/js/eliminar.js}" src="/sistemas/js/eliminar.js"></script>
+</body>
+</html>

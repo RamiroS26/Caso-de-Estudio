@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesti&oacute;n de Sistemas</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="/css/index.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <section class="hero-panel">
+        <div>
+            <p class="eyebrow">Caso de Estudio 12</p>
+            <h1>Panel de administraci&oacute;n</h1>
+            <p class="hero-copy">
+                Administraci&oacute;n de sistemas y oficinas.
+            </p>
+        </div>
+        <div class="hero-actions">
+            <a class="btn btn-primary" th:href="@{/sistemas/crear}" href="/sistemas/crear">Nuevo sistema</a>
+            <a class="btn btn-secondary" th:href="@{/oficinas/crear}" href="/oficinas/crear">Nueva oficina</a>
+        </div>
+    </section>
+
+    <section class="dashboard-grid" aria-label="Accesos principales">
+        <article class="module-card">
+            <div class="module-head">
+                <span class="module-icon">S</span>
+                <div>
+                    <h2>Sistemas</h2>
+                    <p>Alta, consulta, modificaci&oacute;n y baja de sistemas.</p>
+                </div>
+            </div>
+            <div class="module-actions">
+                <a class="btn btn-primary" th:href="@{/sistemas/listar}" href="/sistemas/listar">Ver sistemas</a>
+                <a class="btn btn-ghost" th:href="@{/sistemas/crear}" href="/sistemas/crear">Crear</a>
+            </div>
+        </article>
+
+        <article class="module-card">
+            <div class="module-head">
+                <span class="module-icon">O</span>
+                <div>
+                    <h2>Oficinas</h2>
+                    <p>Registro de oficinas disponibles para asignar sistemas.</p>
+                </div>
+            </div>
+            <div class="module-actions">
+                <a class="btn btn-primary" th:href="@{/oficinas/listar}" href="/oficinas/listar">Ver oficinas</a>
+                <a class="btn btn-ghost" th:href="@{/oficinas/crear}" href="/oficinas/crear">Crear</a>
+            </div>
+        </article>
+    </section>
+
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/js/index.js}" src="/js/index.js"></script>
+</body>
+</html>

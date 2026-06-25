@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar sistema</title>
+    <link rel="stylesheet" th:href="@{/sistemas/css/editar.css}" href="/sistemas/css/editar.css">
+</head>
+<body>
+<header class="app-header">
+    <nav class="nav-shell" aria-label="Navegaci&oacute;n principal">
+        <a class="brand" th:href="@{/}" href="/">
+            <span class="brand-mark">SI</span>
+            <span>
+                <strong>Gesti&oacute;n de Sistemas</strong>
+                <small>Oficinas y sistemas inform&aacute;ticos</small>
+            </span>
+        </a>
+        <div class="nav-links">
+            <a class="active" th:href="@{/sistemas/listar}" href="/sistemas/listar">Sistemas</a>
+            <a th:href="@{/oficinas/listar}" href="/oficinas/listar">Oficinas</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-shell narrow">
+    <div class="page-title-row">
+        <div>
+            <p class="eyebrow">Modificaci&oacute;n</p>
+            <h1>Editar sistema</h1>
+        </div>
+        <a class="btn btn-secondary" th:href="@{/sistemas/listar}" href="/sistemas/listar">Volver</a>
+    </div>
+
+    <form class="form-card"
+          th:action="@{/sistemas/actualizar/{id}(id=${sistema.id})}"
+          th:object="${sistema}"
+          action="/sistemas/actualizar/1"
+          method="post"
+          data-dirty-warning>
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-grid">
+            <label class="field">
+                <span>Nombre</span>
+                <input type="text" th:field="*{nombre}" maxlength="50" required placeholder="Ej. Sistema de Expedientes">
+                <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error de nombre</small>
+            </label>
+
+            <label class="field">
+                <span>Autor</span>
+                <input type="text" th:field="*{autor}" maxlength="40" placeholder="Ej. Direcci&oacute;n de Sistemas">
+                <small th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}">Error de autor</small>
+            </label>
+
+            <label class="field">
+                <span>A&ntilde;o</span>
+                <input type="number" th:field="*{anio}" min="1980" max="2100" placeholder="2026">
+                <small th:if="${#fields.hasErrors('anio')}" th:errors="*{anio}">Error de a&ntilde;o</small>
+            </label>
+
+            <label class="field">
+                <span>Oficina</span>
+                <select id="oficina" name="oficina.id" required>
+                    <option value="">Seleccionar oficina</option>
+                    <option th:each="oficina : ${oficinas}"
+                            th:value="${oficina.id}"
+                            th:selected="${sistema != null and sistema.oficina != null and sistema.oficina.id == oficina.id}"
+                            th:text="${oficina.nombre}">Mesa de Entrada</option>
+                </select>
+                <small th:if="${#fields.hasErrors('oficina')}" th:errors="*{oficina}">Error de oficina</small>
+            </label>
+
+            <label class="field field-full">
+                <span>Descripci&oacute;n</span>
+                <textarea th:field="*{descripcion}"
+                          maxlength="100"
+                          rows="4"
+                          data-counter="descripcion-counter"
+                          placeholder="Resumen del sistema"></textarea>
+                <small><span id="descripcion-counter">0</span>/100 caracteres</small>
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <a class="btn btn-ghost" th:href="@{/sistemas/listar}" href="/sistemas/listar">Cancelar</a>
+            <button class="btn btn-primary" type="submit">Guardar cambios</button>
+        </div>
+    </form>
+</main>
+
+<footer class="app-footer">
+    <p>UNPA 2026 | Laboratorio de Programacion | Silva Ramiro</p>
+</footer>
+
+<script th:src="@{/sistemas/js/editar.js}" src="/sistemas/js/editar.js"></script>
+</body>
+</html>
